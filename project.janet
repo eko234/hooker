@@ -6,4 +6,5 @@
 
 (declare-executable
  :name "hooker"
- :entry "main.janet")
+ :entry "main.janet"
+ :lflags ["-static"])
