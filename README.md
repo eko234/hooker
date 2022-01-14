@@ -7,10 +7,9 @@
    projects the recommended way is to spawn multiple servers
 
 ### ADVICE!!
-  This application is not ready to use, indeed it doesn't quite work
-  yet, the core logic is kinda "implemented", so you better not run it
-  yet
-
+  This application is in a very early stage, it might break
+  but shouldnt do anything terrible unless you tell it to
+ 
 ## USE
 
   The preferred way of usage is defining a hookers dir in your
@@ -24,7 +23,7 @@
   killR <pid>.
 
   if you call
-  `hooker --as client --port 8080 --host localhost --command runR ls -a`
+  `hooker --as client --port 8080 --host localhost --key secretkey -- runR ls -a`
   note thet everything after the command will be used as the arguments for that
   command, in that case runR will run a command, if the flag unsafe is not
   provided hooker will complain in this example, as it will only allow
