@@ -9,6 +9,13 @@
 ### ADVICE!!
   This application is in a very early stage, it might break
   but shouldnt do anything terrible unless you tell it to
+
+
+## COMMANDS
+  -listR (list available scripts in the hookers dir)
+  -pidsR (list the pids of processes executed)
+  -runR <command> [args...](run a script forwarding rest args to it)
+  -killR <pid> (kill a specific process by pid)
  
 ## USE
 
@@ -27,7 +34,7 @@
   note thet everything after the command will be used as the arguments for that
   command, in that case runR will run a command, if the flag unsafe is not
   provided hooker will complain in this example, as it will only allow
-  to run scripts in the hookers folder
+  to run scripts in the hookers dir
 
 ## ROADMAP
 
