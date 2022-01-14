@@ -12,10 +12,13 @@
 
 
 ## COMMANDS
-  -listR (list available scripts in the hookers dir)
-  -pidsR (list the pids of processes executed)
-  -runR <command> [args...](run a script forwarding rest args to it)
-  -killR <pid> (kill a specific process by pid)
+    -listR (list available scripts in the hookers dir)
+    
+    -pidsR (list the pids of processes executed)
+    
+    -runR <command> [args...](run a script forwarding rest args to it)
+    
+    -killR <pid> (kill a specific process by pid)
  
 ## USE
 
