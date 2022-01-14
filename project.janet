@@ -1,9 +1,9 @@
 (declare-project
  :name "hooker"
  :description "a hooker"
- :dependencies ["https://github.com/janet-lang/circlet.git"
-                "https://github.com/janet-lang/json"
-                "https://github.com/joy-framework/joy"])
+ :dependencies ["https://github.com/janet-lang/argparse.git"
+                "https://github.com/janet-lang/spork.git"
+                ])
 
 (declare-executable
  :name "hooker"

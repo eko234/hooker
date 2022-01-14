@@ -1,61 +1,77 @@
-(import circlet :as ci)
+(import argparse :prefix "")
+(import spork/rpc)
 
-(defn getls
-  "gets ls from bin dir" []
-  (try
-   (do
-     (def proc (os/spawn ["ls"] :p {:in :pipe :out :pipe :err :pipe}))
-     (def result 
-       [(:read (proc :out) :all)
-        (:read (proc :err) :all)])
-     (:wait proc)
-     result)
-  ([err] [err])))
+(def argparse-params
+  [``
+   Hooker is a cli application mainly used to automate deployment,
+   it takes as arguments paths of scripts
+   ``
+   "command" {:kind :option
+              :required true
+              :short "c"
+              :help "Command to run"}
+   "host" {:kind :option
+           :required true
+           :short "h"
+           :help "host to connect to"}
+   "port" {:kind :option
+           :required true
+           :short "p"
+           :help "port to connect to"}])
 
-(defn getlsnr
-  "gets ls from bin dir" []
-  (try
-   (do
-     (def proc (os/spawn ["ls"] :p {:in :pipe :out :pipe :err :pipe}))
-     (def result 
-       [(proc :out)
-        (proc :err)])
-     (:wait proc)
-     result)
-  ([err] [err])))
+# (let [res (argparse ;argparse-params)]
+#   (unless res
+#     (os/exit 1))
+#   (pp res))
 
-(defn app
-  [req]
-  (try
-   (do
-     (pp :REQ_START)
-     (def channel (ev/thread-chan 1))
-     (ev/spawn-thread (ev/give channel (getls)))
-     # (ev/do-thread (ev/give channel (getls)))
-     (def result (ev/take channel))
+(rpc/server
+ {:ls (fn [self]
+        (let 
+          [procc (os/spawn ["ls"] :p {:in :pipe :out :pipe :err :pipe})
+           out (:read (procc :out) :all)
+           err (:read (procc :err) :all)
+           _   (:wait procc)]
+          {:out out
+           :err err
+           :return-code (procc :return-code)}))
+  :eval (fn [self x]
+           (print :Nopi) :OK)})
 
-     (pp :REQ_RETURNING)
-     {:status 200
-      :headers {"Content-Type" "application/json"}
-      :body result})
-   ([err] 
-    {:status 500
-      :headers {"Content-Type" "application/json"}
-      :body [:OOPS err]})))
+(def {:ls ls} (rpc/client))
+(pp (ls :x))
 
-(defn app2 [req]
-  (try 
-   (do
-     (def res
-       (try 
-         (do
-           (print :GONORREA)
-           (pp (getlsnr))
-           (print :IJUEPUTA))
-         ([err] (pp err))))
-     {:status 200
-      :body "hi"})
-   ([err] (pp err) {:status 500})))
 
-(defn main "entry point" [& args]
-  (ci/server app2 8087))
+
+
+
+
+
+
+
+## SERVER
+(rpc/server
+ "localhost"
+ 8080
+ {:salute (fn [name]
+            (string "hello " name))})
+
+## CLIENT
+(def {:salute salute} (rpc/client "localhost" 8080))
+(def result (salute "amiguito"))
+(print result) # => "hello amiguito"
+
+
+
+
+
+
+
+
+
+`
+I can make an rpc that also uses an http client to publish its
+ip instead of doing that web socket bullfuckery
+`
+
+(defn main [& args]
+  (print :hello))
