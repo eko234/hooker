@@ -6,6 +6,10 @@
    locally (i know, i know...), so if you want to handle different
    projects the recommended way is to spawn multiple servers
 
+### ADVICE!!
+  This application is not ready to use, indeed it doesn't quite work
+  yet, the core logic is kinda "implemented", so you better not run it
+  yet
 
 ## USE
 
