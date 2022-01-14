@@ -39,6 +39,9 @@
   provided hooker will complain in this example, as it will only allow
   to run scripts in the hookers dir
 
+  note that the scripts will be run from the dir were hooker was called despite
+  the scripts dir being in other location
+
 ## ROADMAP
 
 - [ ] find a better name, but still "funny"
